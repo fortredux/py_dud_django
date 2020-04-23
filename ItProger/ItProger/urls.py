@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Через include прописали путь к нашему blog\urls.py
     path('registration/', usersviews.register, name='registration'),
+    path('profile/', usersviews.profile, name='profile'),
     path('user/', authsviews.LoginView.as_view(template_name='users/user.html'), name='user'),
     path('exit/', authsviews.LogoutView.as_view(template_name='users/exit.html'), name='exit'),
     path('', include('blog.urls')),
