@@ -18,6 +18,9 @@ from django.urls import path, include  # Добавили include
 from users import views as usersviews
 from django.contrib.auth import views as authsviews
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Через include прописали путь к нашему blog\urls.py
@@ -32,4 +35,7 @@ urlpatterns = [
     # Путь path('', views.home, name='blog-home')
     # запускает функцию home из views.py
     # path('empty/', include('blog.urls'))
-]
+]  # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
