@@ -1,14 +1,31 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm  # Это мы наследуем
+from django.contrib.auth.forms import UserCreationForm
+from .models import Profile
 
 
 class UserOurReistration(UserCreationForm):
-    # requierd=True можно не писать - это занчание по умолчанию.
     email = forms.EmailField(required=True)
     
     class Meta:
-        # Лектор говорит, что это тот самый User из импортов
         model = User
-        # В таком порядке будет выводится формочки
         fields = ['username', 'email', 'password1', 'password2']
+
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+    
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+        
+
+class ProfileImage(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        # print(*args, **kwargs)
+        super(ProfileImage, self).__init__(*args, **kwargs)
+        self.fields['img'].label = 'Изображение профиля'
+        
+    class Meta:
+        model = Profile
+        fields = ['img']
