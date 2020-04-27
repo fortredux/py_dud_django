@@ -20,6 +20,7 @@ news = [
 ]
 '''
 
+
 # Для всех функций здесь обязательный параметр request
 def home(request):
     data = {
@@ -29,6 +30,7 @@ def home(request):
     # Здесь нужно вернуть некую html разметку
     return render(request, 'blog/home.html', data)
 
+
 # Создав функцию наподобие первой и прописав путь к ней в urls.py,
 # я получил в ответ вызов функции home, а не этой!
 # Достучаться можно по http://127.0.0.1:8000/blog/empty/
@@ -36,8 +38,10 @@ def contacts(request):
     # Третим аргументом можно передать ключевые аргументы
     return render(request, 'blog/contacts.html', {'title': 'Страница о нас'})
 
+
 def main(request):
     return render(request, 'blog/main.html', {'title': 'Main страница'})
+
 
 def bootstrap(request):
     return render(request, 'blog/bootstrap.html', {'title': 'Bootstrap страница'})

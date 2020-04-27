@@ -6,7 +6,7 @@ from .models import Profile
 
 class UserOurReistration(UserCreationForm):
     email = forms.EmailField(required=True)
-    
+
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
@@ -14,18 +14,18 @@ class UserOurReistration(UserCreationForm):
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
-    
+
     class Meta:
         model = User
         fields = ['username', 'email']
-        
+
 
 class ProfileImage(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         # print(*args, **kwargs)
         super(ProfileImage, self).__init__(*args, **kwargs)
         self.fields['img'].label = 'Изображение профиля'
-        
+
     class Meta:
         model = Profile
         fields = ['img']
