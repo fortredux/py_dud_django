@@ -1,0 +1,28 @@
+{% extends 'blog/main.html' %}
+{% block main_section %}
+    <div class="alert alert-light">
+        <a href="{% url 'blog-home' %}">Вернуться назад</a>
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text }}</p>
+        <div class="row">
+            <div>
+                {% if post.author.profile.img %}
+                <img src="{{ post.author.profile.img.url }}" alt="{{ post.author }}" class="user_image">
+                {% else %}
+                <img src="/pictures/default.jpg" alt="{{ post.author }}" class="user_image">
+                {% endif %}
+            </div>
+            <div class="mt-2">
+                <span class="text-muted">Дата: {{ post.date|date:"d E Y в H:i:s" }}</span>
+                <p>Автор: <mark>{{ post.author }}</mark></p>
+            </div>
+        </div>
+    </div>
+{% endblock main_section %}
+
+{% block aside_section %}
+    <h3><b>Сериалы про ботаников</b></h3>
+    <img src="https://i.ytimg.com/vi/VlsQC87i06w/maxresdefault.jpg" class="img-fluid">
+    <p>Мы составили для вас подборку лучших фильмов про ботаников.</p>
+    <button class="btn btn-warning center-block">Посмотреть</button>
+{% endblock aside_section %}

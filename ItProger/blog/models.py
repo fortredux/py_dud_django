@@ -12,3 +12,6 @@ class News(models.Model):
     class Meta:
         verbose_name = "news"
         verbose_name_plural = "news"
+
+    def __str__(self):
+        return self.title

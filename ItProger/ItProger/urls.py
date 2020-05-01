@@ -29,12 +29,6 @@ urlpatterns = [
     path('user/', authsviews.LoginView.as_view(template_name='users/user.html'), name='user'),
     path('exit/', authsviews.LogoutView.as_view(template_name='users/exit.html'), name='exit'),
     path('', include('blog.urls')),
-    # Так не работает, либо нужно было проходить по
-    # http://127.0.0.1:8000/blog/empty,
-    # либо создать новое приложение.
-    # Путь path('', views.home, name='blog-home')
-    # запускает функцию home из views.py
-    # path('empty/', include('blog.urls'))
 ]  # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
