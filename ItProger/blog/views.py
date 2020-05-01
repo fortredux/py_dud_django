@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import News
 
 
@@ -26,7 +26,7 @@ class ShowNewsView(ListView):
 class NewsDetailView(DetailView):
     model = News
     print(model.title)
-    # template_name = 'blog/home.html'
+    # template_name = 'blog/news_detail.html'  # it's default value
     context_object_name = 'post'  # object by default
 
     def get_context_data(self, **kwards):
@@ -34,6 +34,14 @@ class NewsDetailView(DetailView):
         ctx['title'] = News.objects.filter(pk=self.kwargs['pk']).first()
         return ctx
 
+
+class CreateNewsView(CreateView):
+    model = News
+    fields = ['title', 'text']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 def contacts(request):
     return render(request, 'blog/contacts.html', {'title': 'Страница о нас'})

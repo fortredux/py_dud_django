@@ -29,3 +29,7 @@ body {
     color: #b38a22;
     margin-bottom: 10px;
 }
+
+.alert-light p {
+    white-space: pre-wrap;
+}
