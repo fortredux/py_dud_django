@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import News
 
 
@@ -35,7 +36,7 @@ class NewsDetailView(DetailView):
         return ctx
 
 
-class CreateNewsView(CreateView):
+class CreateNewsView(LoginRequiredMixin, CreateView):
     model = News
     fields = ['title', 'text']
 
@@ -43,13 +44,24 @@ class CreateNewsView(CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+
+class UpdateNewsView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = News
+    fields = ['title', 'text']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        news = self.get_object()
+        if self.request.user == news.author:
+            return True
+        return False
+
 def contacts(request):
     return render(request, 'blog/contacts.html', {'title': 'Страница о нас'})
 
 
 def main(request):
     return render(request, 'blog/main.html', {'title': 'Main страница'})
-
-
-def bootstrap(request):
-    return render(request, 'blog/bootstrap.html', {'title': 'Bootstrap страница'})
