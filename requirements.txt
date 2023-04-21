@@ -3,4 +3,4 @@ django-crispy-forms==1.9.0
 Pillow==7.1.2
 pycodestyle==2.5.0
 pytz==2020.1
-sqlparse==0.3.1
+sqlparse==0.4.4
